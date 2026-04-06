@@ -1,0 +1,10 @@
+groups:
+  - name: test-alert
+    rules:
+      - alert: TestAlert
+        expr: rate(http_requests_total{job="flask-app"}[1m]) > 0
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Traffic is coming to Flask app"
