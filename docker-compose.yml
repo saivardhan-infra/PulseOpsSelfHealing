@@ -41,7 +41,17 @@ services:
       - prometheus
     networks:
       - monitoring
-
+alertmanager:
+  image: prom/alertmanager
+  container_name: alertmanager
+  volumes:
+    - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+  command:
+    - '--config.file=/etc/alertmanager/alertmanager.yml'
+  ports:
+    - "9093:9093"
+  networks:
+    - monitoring
 volumes:
   grafana-data:
 
